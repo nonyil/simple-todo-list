@@ -3,6 +3,7 @@ import { Item } from './types/Item'
 import * as C from './App.styles';
 
 import { ListItem } from './components/ListItem';
+import { AddArea } from './components/AddArea/Index';
 
 const App = () => {
 
@@ -11,12 +12,25 @@ const App = () => {
     { id: 2, name: 'Comprar leite', done: true }
   ]);
 
+  const handleAddTaks = (taskName: string) => {
+    let newList = [...list];
+    newList.push({
+      id: list.length + 1,
+      name: taskName,
+      done: false
+    });
+
+    setList(newList);
+  }
+
   return (
     <C.Container>
       <C.Area>
         <C.Header>Lista de Tarefas</C.Header>
 
-        {}
+        <AddArea
+          onEnter={handleAddTaks}
+        /> 
 
         {list.map((item, index) => (
           <ListItem key={index} item={item}/>
